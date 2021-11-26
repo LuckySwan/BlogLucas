@@ -20,5 +20,6 @@ namespace BlogLucas.Models
         public string Body { get; set; }
         public DateTime DateCreate { get; set; }
         public DateTime? DateUpdated { get; set; }
+        public DateTime DateCreated { get; internal set; }
     }
 }

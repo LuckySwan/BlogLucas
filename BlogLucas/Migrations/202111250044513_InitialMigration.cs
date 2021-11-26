@@ -14,7 +14,7 @@
                         Id = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false, maxLength: 500),
                         Body = c.String(nullable: false, maxLength: 4000),
-                        DateCreate = c.DateTime(nullable: false),
+                        DateCreated = c.DateTime(nullable: false),
                         DateUpdated = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id);
