@@ -14,7 +14,8 @@ namespace BlogLucas.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return View();
+            var posts = _context.Posts;
+            return View(posts);
         }
         public ActionResult Random()
         {
