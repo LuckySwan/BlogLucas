@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,6 +10,7 @@ namespace BlogLucas.Controllers
 {
     public class PostsController : Controller
     {
+        private ApplicationDbContext _context = new ApplicationDbContext();
         // GET: Posts
         public ActionResult Index()
         {
@@ -22,6 +24,31 @@ namespace BlogLucas.Controllers
             
             return View(post);
         }
+
+        public ActionResult Save(Post post)
+
+        {
+            post.DateCreated = DateTime.Now;
+            _context.Posts.Add(post);
+            var res = _context.SaveChanges();
+
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            
+
+            
+
+            if (res > 0)
+            {
+                //return new HttpStatusCodeResult(200);
+                return RedirectToAction("Index");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }
         public ActionResult NewPost()
         {
             return View();
@@ -30,7 +57,12 @@ namespace BlogLucas.Controllers
         // GET: Posts/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var post = _context.Posts.SingleOrDefault(p => p.Id == id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
         }
 
         // GET: Posts/Create

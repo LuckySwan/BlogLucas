@@ -1,0 +1,25 @@
+﻿@model BlogLucas.Models.Post
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes</h2>
+
+<div class="form-group col-lg-12 col-md-12 col-sm-12">
+    @Html.LabelFor(p => p.Title)
+    <div> @Model.Title </div>
+</div>
+
+<div class="form-group col-lg-12 col-md-12 col-sm-12">
+@Html.LabelFor(p => p.DateCreated) | @Html.LabelFor(p => p.DateUpdated)
+<div> @Model.DateCreated.ToString("dd/MM/yyyy") | @Model.DateUpdated</div>
+</div>
+
+<div class="form-group col-lg-12 col-md-12 col-sm-12">
+    @Html.LabelFor(p => p.Body)
+    <div>@Model.Body</div>
+   </div>
+
+@Html.ActionLink("Voltar", "Index", "Posts", new { @class = "btn btn-Primary" })
+@Html.ActionLink("Editar", "Edit", "Posts", new { id = Model.Id}, new { @class = "btn btn-Primary" })
+@Html.ActionLink("Deletar", "Delete", "Posts", new { id = Model.Id}, new { @class = "btn btn-danger" })
