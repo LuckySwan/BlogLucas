@@ -64,7 +64,9 @@ namespace BlogLucas.Controllers
         }
         public ActionResult NewPost()
         {
-            return View();
+            var authors = _context.Authors.ToList();
+            var postViewModel = new PostViewModel { Author = authors};
+            return View(postViwmModel);
         }
 
         // GET: Posts/Details/5

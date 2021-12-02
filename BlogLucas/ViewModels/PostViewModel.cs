@@ -21,6 +21,8 @@ namespace BlogLucas.ViewModels
         public string Body { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
-        public Author Author { get; set; }
+        public IEnumerable<Author> Author { get; set; }
+        [Required]
+        public Author_Id { get; set; }
     }
 }
