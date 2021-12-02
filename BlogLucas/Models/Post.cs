@@ -18,8 +18,8 @@ namespace BlogLucas.Models
         [StringLength(4000)]// nao deixar passar de 4000 caracteres
         [AllowHtml]// permite usar o HTML
         public string Body { get; set; }
-        public DateTime DateCreate { get; set; }
+        public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
-        public DateTime DateCreated { get; internal set; }
+        public Author Author { get; set; }
     }
 }

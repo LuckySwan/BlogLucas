@@ -13,7 +13,7 @@ namespace BlogLucas.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202111250044513_InitialMigration"; }
+            get { return "202111300054518_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

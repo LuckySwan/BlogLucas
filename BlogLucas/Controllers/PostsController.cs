@@ -19,35 +19,46 @@ namespace BlogLucas.Controllers
         }
         public ActionResult Random()
         {
-            
-           var post = new Post { Title = "Post Exemplo", Body = "Corpo da mensagem", DateCreated = DateTime.Now };
 
-            
+            var post = new Post { Title = "Post Exemplo", Body = "Corpo da mensagem", DateCreated = DateTime.Now };
+            ViewBag.Post = post;
+
+
             return View(post);
         }
-
+        [HttpPost]
         public ActionResult Save(Post post)
-
         {
-            post.DateCreated = DateTime.Now;
-            _context.Posts.Add(post);
-            var res = _context.SaveChanges();
-
-            if (!ModelState.IsValid)
+            int res = 0;
+            if (post.Id == 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                post.DateCreated = DateTime.Now;
+                _context.Posts.Add(post);
+                res = _context.SaveChanges();
             }
 
-            
+            else
+            {
+                var postToUpdate = _context.Posts.SingleOrDefault(p => p.Id == post.Id);
+                postToUpdate.Title = post.Title;
+                postToUpdate.Body = post.Body;
+                postToUpdate.DateUpdated = DateTime.Now;
 
-            
+                // _context.Posts.Add(postToUpdate);
+                res = _context.SaveChanges();
 
+            }
             if (res > 0)
             {
                 //return new HttpStatusCodeResult(200);
                 return RedirectToAction("Index");
             }
 
+
+            //if (!ModelState.IsValid)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
         public ActionResult NewPost()
@@ -91,7 +102,12 @@ namespace BlogLucas.Controllers
         // GET: Posts/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var postToUpdate = _context.Posts.SingleOrDefault(p => p.Id == id);
+            if (postToUpdate == null)
+            {
+                return HttpNotFound();
+            }
+            return View(postToUpdate);
         }
 
         // POST: Posts/Edit/5
@@ -113,23 +129,29 @@ namespace BlogLucas.Controllers
         // GET: Posts/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var postToDelete = _context.Posts.SingleOrDefault(p => p.Id == id);
+            if (postToDelete == null)
+            {
+                return HttpNotFound();
+            }
+            return View(postToDelete);
         }
+            
+        
 
         // POST: Posts/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            try
+            var postToDelete = _context.Posts.SingleOrDefault(p => p.Id == id);
+            if (postToDelete == null)
             {
-                // TODO: Add delete logic here
+                return HttpNotFound();
+            }
+            _context.Posts.Remove(postToDelete);
+            _context.SaveChanges();
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -12,5 +12,7 @@ namespace BlogLucas.Models
         { }
         public static ApplicationDbContext Create() => new ApplicationDbContext();
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        
     }
 }
