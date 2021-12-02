@@ -33,6 +33,7 @@ namespace BlogLucas.Controllers
             if (post.Id == 0)
             {
                 post.DateCreated = DateTime.Now;
+                post.Author.Id = 1;
                 _context.Posts.Add(post);
                 res = _context.SaveChanges();
             }

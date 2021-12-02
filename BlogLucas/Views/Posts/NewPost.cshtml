@@ -1,4 +1,4 @@
-﻿@model BlogLucas.Models.Post
+﻿@model BlogLucas.ViewModels.PostViewModel
 @{
     ViewBag.Title = "NewPost";
 }
@@ -15,6 +15,11 @@
         <div class="form-group">
             @Html.LabelFor(p => p.Body)
             @Html.TextAreaFor(p => p.Body, new { @class = "form-contrl" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Author.Name)
+            @*@Html.ListBoxFor(p => p.Author.Name, null,
+                                            new { @class = "form-Control"})*@
         </div>
         @Html.HiddenFor(p => p.Id)
         <div class="form-group">
