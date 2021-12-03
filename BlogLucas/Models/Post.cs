@@ -21,5 +21,6 @@ namespace BlogLucas.Models
         public DateTime DateCreated { get; set; }
         public DateTime? DateUpdated { get; set; }
         public Author Author { get; set; }
+        public int AuthorId { get; set; }
     }
 }

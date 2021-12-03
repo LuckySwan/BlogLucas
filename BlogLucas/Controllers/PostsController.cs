@@ -1,4 +1,5 @@
 ﻿using BlogLucas.Models;
+using BlogLucas.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,20 @@ namespace BlogLucas.Controllers
             return View(post);
         }
         [HttpPost]
-        public ActionResult Save(Post post)
+        public ActionResult Save(PostViewModel postViewModel)
         {
             int res = 0;
+
+            var post = new Post
+            {
+                Id = postViewModel.Id,
+                Title = postViewModel.Title,
+                Body = postViewModel.Body,
+                AuthorId = postViewModel.Author_Id,
+                DateCreated = DateTime.Now
+
+            };
+
             if (post.Id == 0)
             {
                 post.DateCreated = DateTime.Now;
@@ -66,7 +78,7 @@ namespace BlogLucas.Controllers
         {
             var authors = _context.Authors.ToList();
             var postViewModel = new PostViewModel { Author = authors};
-            return View(postViwmModel);
+            return View(postViewModel);
         }
 
         // GET: Posts/Details/5
