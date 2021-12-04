@@ -1,0 +1,33 @@
+﻿@model BlogLucas.Models.Cadastro
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Novo Cadastro</h2>
+
+@{using (Html.BeginForm("Save", "Cadastros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+
+        <div class="form-group">
+            @Html.LabelFor(p => p.Nome)
+            @Html.TextBoxFor(p => p.Nome, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Endereco)
+            @Html.TextBoxFor(p => p.Endereco, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(p => p.Telefone)
+            @Html.TextBoxFor(p => p.Telefone, new { @class = "form-control" })
+        </div>
+        @Html.HiddenFor(p => p.Id)
+        <div class="form-group">
+            <input type="submit" id="btnSave" value="Save" onclick="sendData()" class="btn btn-success" />
+        </div>
+        
+    }
+}
+
+
+
+
