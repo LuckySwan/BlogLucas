@@ -14,5 +14,6 @@ namespace BlogLucas.Models
         public DbSet<Post> Posts { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Cadastro> Cadastro { get; set; }
+        public object Cadastros { get; internal set; }
     }
 }
